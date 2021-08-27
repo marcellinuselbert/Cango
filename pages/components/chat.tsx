@@ -6,13 +6,13 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import SignOut from "./signout";
-import {Chat} from "../../models/chat"
+import {Chat} from "../../models/Chats"
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
     apiKey: "AIzaSyATUuodX6YGR_hSGiiGsrCbTwuCfzLbsGc",
     authDomain: "chat-next-task.firebaseapp.com",
-    projectId: "chat-next-task",
+    projectId: "chat-next-task", 
     storageBucket: "chat-next-task.appspot.com",
     messagingSenderId: "818088000542",
     appId: "1:818088000542:web:81034c0e162816ddf1420f",
@@ -24,6 +24,7 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 
+
   function ChatRoom() {
     const spanRef = React.useRef<null | HTMLElement>(null);
     const messagesRef = firestore.collection("messages");
@@ -33,7 +34,7 @@ const firestore = firebase.firestore();
     const [messages] = useCollectionData(query, { idField: "id" });
     const [formValue, setFormValue] = useState("");
 
-    const sendMessage = async (e: React.FormEvent<HTMLInputElement>) => {
+    const sendMessage = async (e: React.FormEvent) => {
       e.preventDefault();
 
       await messagesRef.add({
@@ -54,8 +55,8 @@ const firestore = firebase.firestore();
       spanRef.current?.scrollIntoView({ behavior: "smooth" });
       // console.log("hello");
     };
-    // console.log(messages)
-
+    console.log(messages)
+    
     return (
       <>
         {/* <main> */}
@@ -89,10 +90,10 @@ const firestore = firebase.firestore();
     );
   }
   function ChatMessage(props: {message: Chat}){
-    const { text, uid, photoURL, createdAt, displayName } = props.message;
-    const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
+    const { text, uid, photoURL, createdAt, displayName,id } = props.message;
+    const messageClass = uid ? "sent" : "received";
     const className =
-      uid === auth.currentUser.uid ? "sentName" : "receivedName";
+      uid ? "sentName" : "receivedName";
 
     return (
       <>
