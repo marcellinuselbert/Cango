@@ -92,9 +92,9 @@ const firestore = firebase.firestore();
   }
   function ChatMessage(props: {message: Chat}){
     const { text, uid, photoURL, createdAt, displayName,id } = props.message;
-    const messageClass = uid ? "sent" : "received";
+    const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
     const className =
-      uid ? "sentName" : "receivedName";
+      uid === auth.currentUser.uid ? "sentName" : "receivedName";
 
     return (
       <>
@@ -111,10 +111,10 @@ const firestore = firebase.firestore();
             }
           />
           <p className="p-2 px-3">{text}</p>
-          {/* <div className="mt-2">
-          {addZeroBefore(createdAt.toDate().getHours())}:
-          {addZeroBefore(createdAt.toDate().getMinutes())}
-        </div> */}
+          <div className="mt-2">
+          {/* {addZeroBefore(createdAt.toDate().getHours())}:
+          {addZeroBefore(createdAt.toDate().getMinutes())} */}
+        </div>
         </div>
       </>
     );
