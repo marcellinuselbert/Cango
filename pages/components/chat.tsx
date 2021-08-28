@@ -20,7 +20,7 @@ if (!firebase.apps.length) {
   });
 }
 
-const auth = firebase.auth();
+const auth:any = firebase.auth();
 const firestore = firebase.firestore();
 
 
@@ -94,7 +94,7 @@ const firestore = firebase.firestore();
     const { text, uid, photoURL, createdAt, displayName,id } = props.message;
     const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
     const className =
-      uid === auth.currentUser.uid ? "sentName" : "receivedName";
+      uid === auth.currentUser.uid? "sentName" : "receivedName";
 
     return (
       <>
