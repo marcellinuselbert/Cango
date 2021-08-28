@@ -64,7 +64,8 @@ const firestore = firebase.firestore();
     return (
       <>
         {/* <main> */}
-        <header className="bg-gray-700 rounded-t-lg grid grid-cols-2 h-20">
+        <div className="mb-36">
+          <header className="bg-gray-700 rounded-t-lg grid grid-cols-2 h-20">
           <h1 className="mt-5 ml-5 text-3xl text-white">Cango</h1>
           <div className="flex justify-end mt-5">
             <SignOut />
@@ -89,7 +90,9 @@ const firestore = firebase.firestore();
             </Button>
           </form>
           {/* <p>{groupDate(messages)}</p> */}
+        </div> 
         </div>
+       
       </>
     );
   }
