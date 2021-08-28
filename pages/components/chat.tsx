@@ -34,6 +34,7 @@ const firestore = firebase.firestore();
     const [messages]= useCollectionData<Chat>(query, { idField: "id" });
     const [formValue, setFormValue] = useState("");
 
+
     const sendMessage = async (e: React.FormEvent) => {
       e.preventDefault();
 
@@ -45,6 +46,7 @@ const firestore = firebase.firestore();
         text: formValue,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
+      // console.log(messages[0].createdAt)
       // const date: Date = messages.createdAt.toDate();
       // console.log(date)
       // const date = dateCreated.toDate().toDateString()
@@ -53,8 +55,9 @@ const firestore = firebase.firestore();
       // })
       setFormValue("");
       spanRef.current?.scrollIntoView({ behavior: "smooth" });
+      console.log('hello')
       // console.log("hello");
-      
+     
     };
 
     
@@ -112,8 +115,8 @@ const firestore = firebase.firestore();
           />
           <p className="p-2 px-3">{text}</p>
           <div className="mt-2">
-          {/* {addZeroBefore(createdAt.toDate().getHours())}:
-          {addZeroBefore(createdAt.toDate().getMinutes())} */}
+          {addZeroBefore(createdAt.toDate().getHours())}:
+          {addZeroBefore(createdAt.toDate().getMinutes())}
         </div>
         </div>
       </>
