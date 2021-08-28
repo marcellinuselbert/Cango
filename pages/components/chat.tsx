@@ -31,13 +31,13 @@ const firestore = firebase.firestore();
 
     const query = messagesRef.orderBy("createdAt");
     
-    const [messages]= useCollectionData<Chat>(query, { idField: "id" });
+    const [messages,loading]= useCollectionData<Chat>(query, { idField: "id" });
     const [formValue, setFormValue] = useState("");
 
-
+    console.log(loading)
     const sendMessage = async (e: React.FormEvent) => {
       e.preventDefault();
-
+      console.log('hello')
       await messagesRef.add({
         //create text
         uid: auth.currentUser?.uid,
@@ -55,7 +55,7 @@ const firestore = firebase.firestore();
       // })
       setFormValue("");
       spanRef.current?.scrollIntoView({ behavior: "smooth" });
-      console.log('hello')
+      
       // console.log("hello");
      
     };
@@ -115,8 +115,7 @@ const firestore = firebase.firestore();
           />
           <p className="p-2 px-3">{text}</p>
           <div className="mt-2">
-          {addZeroBefore(createdAt.toDate().getHours())}:
-          {addZeroBefore(createdAt.toDate().getMinutes())}
+          {addZeroBefore(createdAt?.toDate().getHours())}:{addZeroBefore(createdAt?.toDate().getMinutes())}
         </div>
         </div>
       </>
