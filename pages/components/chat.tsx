@@ -24,14 +24,14 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 
-
   function ChatRoom() {
     const spanRef = React.useRef<null | HTMLElement>(null);
+    
     const messagesRef = firestore.collection("messages");
 
     const query = messagesRef.orderBy("createdAt");
-
-    const [messages] = useCollectionData(query, { idField: "id" });
+    
+    const [messages]= useCollectionData<Chat>(query, { idField: "id" });
     const [formValue, setFormValue] = useState("");
 
     const sendMessage = async (e: React.FormEvent) => {
@@ -49,13 +49,14 @@ const firestore = firebase.firestore();
       // console.log(date)
       // const date = dateCreated.toDate().toDateString()
       // messages.map((message)=>{
-      //   console.log(message.createdAt.toDate())
+      //   console.log(message)
       // })
       setFormValue("");
       spanRef.current?.scrollIntoView({ behavior: "smooth" });
       // console.log("hello");
+      
     };
-    console.log(messages)
+
     
     return (
       <>
