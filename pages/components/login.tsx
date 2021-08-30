@@ -1,16 +1,8 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-
+import firebaseConfig from "../../utils/firebaseConfig";
 if (!firebase.apps.length) {
-  firebase.initializeApp({
-    apiKey: "AIzaSyATUuodX6YGR_hSGiiGsrCbTwuCfzLbsGc",
-    authDomain: "chat-next-task.firebaseapp.com",
-    projectId: "chat-next-task",
-    storageBucket: "chat-next-task.appspot.com",
-    messagingSenderId: "818088000542",
-    appId: "1:818088000542:web:81034c0e162816ddf1420f",
-    measurementId: "G-P7999VGY6S",
-  });
+  firebase.initializeApp(firebaseConfig);
 }
 const auth = firebase.auth();
 function Login() {
@@ -20,10 +12,12 @@ function Login() {
   };
   return (
     <div>
-      <div className="text-6xl text-center mt-20">Welcome to Cango</div>
+      <div className="text-6xl text-center mb-32 animate-slide-bottom">
+        Welcome to Cango
+      </div>
       <div className="text-xl text-center mt-2"> Open Chat for All</div>
       <div className="flex justify-center mt-10">
-        <div className="w-1/2 h-10 bg-blue-500 rounded-xl flex justify-center">
+        <div className="w-1/2 h-10 bg-blue-500 rounded-xl flex justify-center animate-slide-top">
           <button
             className="p-2 text-white font-medium"
             onClick={signInWithGoogle}
