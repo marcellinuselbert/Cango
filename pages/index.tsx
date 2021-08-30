@@ -16,8 +16,8 @@ const firestore = firebase.firestore();
 export default function Home() {
   const [user] = useAuthState(auth);
   return (
-    <div className="flex justify-center lg:mt-10">
-      <div className="lg:w-1/3 w-full">
+    <div className="flex justify-center  h-screen animate-color-change-2x">
+      <div className="lg:w-2/6 lg:mt-3 w-full">
         <div>
           <section>{user ? <ChatRoom /> : <Login />}</section>
         </div>

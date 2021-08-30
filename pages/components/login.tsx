@@ -15,16 +15,17 @@ function Login() {
       <div className="text-6xl text-center mb-32 animate-slide-bottom">
         Welcome to Cango
       </div>
-      <div className="text-xl text-center mt-2"> Open Chat for All</div>
+      <div className="text-xl text-center mt-2 animate-fade-in">
+        {" "}
+        Open Chat for All
+      </div>
       <div className="flex justify-center mt-10">
-        <div className="w-1/2 h-10 bg-blue-500 rounded-xl flex justify-center animate-slide-top">
-          <button
-            className="p-2 text-white font-medium"
-            onClick={signInWithGoogle}
-          >
-            Sign in with Google
-          </button>
-        </div>
+        <button
+          onClick={signInWithGoogle}
+          className="w-1/2 h-10 mt-20 bg-blue-500 rounded-xl flex justify-center animate-slide-top"
+        >
+          <div className="p-2 text-white font-medium ">Sign in with Google</div>
+        </button>
       </div>
     </div>
   );

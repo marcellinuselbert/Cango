@@ -89,7 +89,7 @@ function ChatRoom() {
           </div>
         </header>
         <div>
-          <div className="lg:h-96 h-ext overflow-y-scroll bg-gray-200">
+          <div className="lg:h-up h-ext overflow-y-scroll bg-gray-300">
             {/* {messages &&
               messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)} */}
             {
@@ -113,13 +113,13 @@ function ChatRoom() {
             <TextField
               value={formValue}
               onChange={(e) => setFormValue(e.target.value)}
-              placeholder="enter text"
-              className="w-full"
+              placeholder="Enter a message"
+              className="w-full bg-white"
               variant="filled"
             />
-            <Button variant="contained" color="primary" disabled={!formValue}>
+            {/* <button className="bg-blue-500" disabled={!formValue}>
               <p>Enter</p>
-            </Button>
+            </button> */}
           </form>
         </div>
       </div>
@@ -135,8 +135,7 @@ function ChatMessage(props: { message: Chat }) {
     <>
       <p className={`${className}`}>{displayName}</p>
       <div className={`message ${messageClass} m-2 flex mx-4`}>
-        <Image
-          alt="display-image"
+        <img
           className="w-10 h-10 rounded-full"
           src={
             photoURL || "https://api.adorable.io/avatars/23/abott@adorable.png"
