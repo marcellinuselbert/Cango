@@ -79,9 +79,7 @@ function ChatRoom() {
             <div className="grid grid-cols-2 h-20">
               <div className="mt-2 ml-5 animate-fade-in-title">
                 <div className=" text-3xl text-white">Cango </div>
-                <div className="text-xl text-gray-300">
-                  by Marcellinus Elbert
-                </div>
+                <div className="text-xl text-gray-300">by Marcellinus</div>
               </div>
               <div className="flex justify-end mt-5">
                 <SignOut />

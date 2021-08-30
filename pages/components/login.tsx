@@ -22,7 +22,7 @@ function Login() {
       <div className="flex justify-center mt-10">
         <button
           onClick={signInWithGoogle}
-          className="w-1/6 h-10 mt-20 bg-blue-500 rounded-xl flex justify-center animate-slide-top"
+          className="lg:w-1/6 w-1/2 h-10 mt-20 bg-blue-500 rounded-xl flex justify-center animate-slide-top"
         >
           <div className="p-2 text-white font-medium ">Sign in with Google</div>
         </button>
