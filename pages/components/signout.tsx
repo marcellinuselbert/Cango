@@ -11,8 +11,7 @@ function SignOut() {
   return (
     auth.currentUser && (
       <button
-        className="w-20 h-10 bg-blue-500 rounded-lg  mb-3 lg:mb-3 mr-5"
-        style={{ zIndex: -1 }}
+        className="w-20 h-10 bg-blue-500 rounded-lg  mr-5"
         onClick={() => auth.signOut()}
       >
         Sign Out
