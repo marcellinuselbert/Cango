@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import SignOut from "./signout";
 import { Chat } from "../../models/Chats";
 import { groupByDate } from "../../models/groupByDate";
-import { isToday } from "date-fns";
+import Image from "next/image";
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
@@ -92,18 +92,21 @@ function ChatRoom() {
           <div className="lg:h-96 h-ext overflow-y-scroll bg-gray-200">
             {/* {messages &&
               messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)} */}
-            {groupArrays &&
-              groupArrays.map((byDates, index) => (
-                <div>
-                  <ChatDate key={index} dates={byDates} />
-                  {byDates.chats?.map(
-                    (msg) =>
-                      msg !== undefined && (
-                        <ChatMessage key={msg.id} message={msg} />
-                      )
-                  )}
-                </div>
-              ))}
+            {
+              /* eslint-disable */
+              groupArrays &&
+                groupArrays.map((byDates, index) => (
+                  <div>
+                    <ChatDate key={index} dates={byDates} />
+                    {byDates.chats?.map(
+                      (msg) =>
+                        msg !== undefined && (
+                          <ChatMessage key={msg.id} message={msg} />
+                        )
+                    )}
+                  </div>
+                ))
+            }{" "}
             <span ref={spanRef}></span>
           </div>
           <form onSubmit={sendMessage} className="flex justify-end">
@@ -132,7 +135,8 @@ function ChatMessage(props: { message: Chat }) {
     <>
       <p className={`${className}`}>{displayName}</p>
       <div className={`message ${messageClass} m-2 flex mx-4`}>
-        <img
+        <Image
+          alt="display-image"
           className="w-10 h-10 rounded-full"
           src={
             photoURL || "https://api.adorable.io/avatars/23/abott@adorable.png"
