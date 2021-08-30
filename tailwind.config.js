@@ -14,6 +14,8 @@ module.exports = {
           "slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s  both",
         "fade-in":
           "fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.5s  both",
+        "fade-in-title":
+          "fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1s  both",
         "tracking-in-expand":
           "tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000)   both",
         "color-change-2x":
@@ -56,6 +58,14 @@ module.exports = {
             opacity: "1",
           },
         },
+        "fade-in-title": {
+          "0%": {
+            opacity: "0",
+          },
+          to: {
+            opacity: "1",
+          },
+        },
         "tracking-in-expand": {
           "0%": {
             "letter-spacing": "-.5em",
@@ -70,10 +80,10 @@ module.exports = {
         },
         "color-change-2x": {
           "0%": {
-            background: "#19dcea",
+            background: "#56ff2c",
           },
           to: {
-            background: "#b22cff",
+            background: "#03f4fc",
           },
         },
       },
@@ -82,7 +92,7 @@ module.exports = {
       },
       spacing: {
         ext: "35rem",
-        up: "28rem",
+        up: "32rem",
         upSize: "26rem",
       },
     },

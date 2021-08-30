@@ -5,17 +5,14 @@ import "firebase/firestore";
 import "firebase/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import SignOut from "./signout";
 import { Chat } from "../../models/Chats";
 import { groupByDate } from "../../models/groupByDate";
-import Image from "next/image";
+import Loading from "./loading";
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
-import { endOfYesterday } from "date-fns";
 
-// var format = require("date-fns/format");
 const auth: any = firebase.auth();
 const firestore = firebase.firestore();
 
@@ -23,7 +20,9 @@ function ChatRoom() {
   const spanRef = React.useRef<null | HTMLElement>(null);
   const messagesRef = firestore.collection("messages");
   const query = messagesRef.orderBy("createdAt");
-  const [messages] = useCollectionData<Chat>(query, { idField: "id" });
+  const [list_chats, isLoading] = useCollectionData<Chat>(query, {
+    idField: "id",
+  });
   const [formValue, setFormValue] = useState("");
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,9 +38,6 @@ function ChatRoom() {
     setFormValue("");
     spanRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-  const [list_chats] = useCollectionData<Chat>(query, { idField: "id" });
-  console.log(list_chats);
-
   const groups = list_chats?.reduce(
     (listDate: Record<string, Partial<Chat[]>>, chat: Chat) => {
       const dd = String(chat.createdAt?.toDate().getDate()).padStart(2, "0");
@@ -71,58 +67,64 @@ function ChatRoom() {
       })
     : [];
 
-  // console.log(groupArrays);
   groupArrays.map((msg) => {
     console.log(msg);
-    // const chats = msg;
   });
-  // console.log(chats);
-  // console.log(groupArrays[0]);
 
   return (
     <>
-      <div className="animate-shadow-drop-center">
-        <header className="bg-gray-700 rounded-t-lg grid grid-cols-2 h-20">
-          <h1 className="mt-5 ml-5 text-3xl text-white">Cango</h1>
-          <div className="flex justify-end mt-5">
-            <SignOut />
-          </div>
-        </header>
-        <div>
-          <div className="lg:h-up h-ext overflow-y-scroll bg-gray-300">
-            {/* {messages &&
-              messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)} */}
-            {
-              /* eslint-disable */
-              groupArrays &&
-                groupArrays.map((byDates, index) => (
-                  <div>
-                    <ChatDate key={index} dates={byDates} />
-                    {byDates.chats?.map(
-                      (msg) =>
-                        msg !== undefined && (
-                          <ChatMessage key={msg.id} message={msg} />
-                        )
-                    )}
-                  </div>
-                ))
-            }{" "}
-            <span ref={spanRef}></span>
-          </div>
-          <form onSubmit={sendMessage} className="flex justify-end">
-            <TextField
-              value={formValue}
-              onChange={(e) => setFormValue(e.target.value)}
-              placeholder="Enter a message"
-              className="w-full bg-white"
-              variant="filled"
-            />
-            {/* <button className="bg-blue-500" disabled={!formValue}>
+      {!isLoading ? (
+        <div className="animate-fade-in">
+          <header className="bg-gray-700 lg:rounded-none rounded-t-lg">
+            <div className="grid grid-cols-2 h-20">
+              <div className="mt-2 ml-5 animate-fade-in-title">
+                <div className=" text-3xl text-white">Cango </div>
+                <div className="text-xl text-gray-300">
+                  by Marcellinus Elbert
+                </div>
+              </div>
+              <div className="flex justify-end mt-5">
+                <SignOut />
+              </div>
+            </div>
+          </header>
+
+          <div>
+            <div className="lg:h-up h-ext overflow-y-scroll bg-gray-300">
+              {
+                /* eslint-disable */
+                groupArrays &&
+                  groupArrays.map((byDates, index) => (
+                    <div>
+                      <ChatDate key={index} dates={byDates} />
+                      {byDates.chats?.map(
+                        (msg) =>
+                          msg !== undefined && (
+                            <ChatMessage key={msg.id} message={msg} />
+                          )
+                      )}
+                    </div>
+                  ))
+              }{" "}
+              <span ref={spanRef}></span>
+            </div>
+            <form onSubmit={sendMessage} className="flex justify-end">
+              <TextField
+                value={formValue}
+                onChange={(e) => setFormValue(e.target.value)}
+                placeholder="Enter a message"
+                className="w-full bg-white"
+                variant="filled"
+              />
+              {/* <button className="bg-blue-500" disabled={!formValue}>
               <p>Enter</p>
             </button> */}
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 }
