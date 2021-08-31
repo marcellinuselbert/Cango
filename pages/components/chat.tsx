@@ -17,15 +17,33 @@ const auth: any = firebase.auth();
 const firestore = firebase.firestore();
 
 function ChatRoom() {
-  const spanRef = React.useRef<null | HTMLElement>(null);
+  const spanRef = React.useRef<HTMLSpanElement>(null);
+  {
+    /*refer to span element*/
+  }
   const messagesRef = firestore.collection("messages");
+  {
+    /*get collection messages from firestore db*/
+  }
   const query = messagesRef.orderBy("createdAt");
+  {
+    /*order messages based on createdAt*/
+  }
   const [list_chats, isLoading] = useCollectionData<Chat>(query, {
     idField: "id",
   });
+  {
+    /*based on created at query with ID parameter*/
+  }
   const [formValue, setFormValue] = useState("");
+  {
+    /*set the variable formValue and setForm Value with empty string*/
+  }
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
+    {
+      /*prevent the the submit effect*/
+    }
     console.log("hello");
     await messagesRef.add({
       //create text
@@ -155,7 +173,7 @@ function ChatDate(props: { dates: groupByDate }) {
   const tanggal = props.dates.date;
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center sticky top-0">
       <div className="flex justify-center items-center my-5 w-28 h-10 bg-dateBubble rounded-lg">
         {tanggal}
       </div>

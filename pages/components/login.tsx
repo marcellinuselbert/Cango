@@ -6,10 +6,13 @@ if (!firebase.apps.length) {
 }
 const auth = firebase.auth();
 function Login() {
-  const signInWithGoogle = () => {
+  function signInWithGoogle() {
+    {
+      /*this function trigger the google firebase api especially google firebase authentication API*/
+    }
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
-  };
+  }
   return (
     <div className="mt-20">
       <div className="text-6xl text-center mb-32 animate-slide-bottom cursor-default ">
