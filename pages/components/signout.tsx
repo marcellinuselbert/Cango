@@ -11,7 +11,7 @@ function SignOut() {
   return (
     auth.currentUser && (
       <button
-        className="w-20 h-10 bg-blue-500 rounded-lg mr-5 animate-fade-in"
+        className="w-20 h-10 bg-blue-500 hover:bg-blue-700 delay-100 rounded-lg mr-5 animate-fade-in"
         onClick={() => auth.signOut()}
       >
         Sign Out

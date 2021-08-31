@@ -114,9 +114,9 @@ function ChatRoom() {
                 className="w-full bg-white"
                 variant="filled"
               />
-              {/* <button className="bg-blue-500" disabled={!formValue}>
-              <p>Enter</p>
-            </button> */}
+              {/* <button className="bg-gray-200 mr-5 w0" disabled={!formValue}>
+                <p>Send</p>
+              </button> */}
             </form>
           </div>
         </div>

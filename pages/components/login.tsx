@@ -12,17 +12,17 @@ function Login() {
   };
   return (
     <div className="mt-20">
-      <div className="text-6xl text-center mb-32 animate-slide-bottom">
+      <div className="text-6xl text-center mb-32 animate-slide-bottom cursor-default ">
         Welcome to Cango
       </div>
-      <div className="text-xl text-center mt-2 animate-fade-in">
+      <div className="text-xl text-center mt-2 animate-fade-in cursor-default ">
         {" "}
         Open Chat for All
       </div>
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-10 ">
         <button
           onClick={signInWithGoogle}
-          className="lg:w-1/6 w-1/2 h-10 mt-20 bg-blue-500 rounded-xl flex justify-center animate-slide-top"
+          className="lg:w-1/6 w-1/2 h-10 mt-20 bg-blue-500 rounded-xl flex justify-center  animate-slide-top hover:bg-blue-700 delay-100"
         >
           <div className="p-2 text-white font-medium ">Sign in with Google</div>
         </button>
