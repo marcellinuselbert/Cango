@@ -5,7 +5,9 @@ function Loading() {
         <div className="double-bounce1"></div>
         <div className="double-bounce2"></div>
       </div>
-      <div className="flex justify-center animate-bounce">Building Cango</div>
+      <div className="flex justify-center animate-bounce">
+        Building Cango Chat
+      </div>
     </div>
   );
 }
