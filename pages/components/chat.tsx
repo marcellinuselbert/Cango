@@ -44,50 +44,48 @@ function ChatRoom() {
     {
       /*prevent the the submit effect*/
     }
-    console.log("hello");
+
     await messagesRef.add({
-      //create text
+      //create new collection
       uid: auth.currentUser?.uid,
       photoURL: auth.currentUser?.photoURL,
       displayName: auth.currentUser?.displayName,
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
-    setFormValue("");
-    spanRef.current?.scrollIntoView({ behavior: "smooth" });
+    setFormValue(""); //after sending messages input will be deleted
+    spanRef.current?.scrollIntoView({ behavior: "smooth" }); //after submit scroll smoothly
   };
   const groups = list_chats?.reduce(
+    //list_chats array with object text, displayname etc.
     (listDate: Record<string, Partial<Chat[]>>, chat: Chat) => {
+      //reduce is like forEach will map the list_chats into list_date and chat
+      //Record function will assign key to string and value to type chat model
       const dd = String(chat.createdAt?.toDate().getDate()).padStart(2, "0");
       const mm = String(chat.createdAt?.toDate().getMonth() + 1).padStart(
         2,
         "0"
       );
       const yyyy = String(chat.createdAt?.toDate().getFullYear());
-
-      const date: string = dd + "/" + mm + "/" + yyyy;
+      const date: string = dd + "/" + mm + "/" + yyyy; //set date
       if (!listDate[date]) {
-        listDate[date] = [];
+        listDate[date] = []; //if new message is not same date add new list of date
       }
-      listDate[date].push(chat);
+      listDate[date].push(chat); //if messages have the same date push chat to the same date
       return listDate;
     },
+
     {}
   );
-  console.log({ groups });
   // // Edit: to add it in the array format instead
   const groupArrays: groupByDate[] = groups
     ? Object.keys(groups).map((date) => {
         return {
-          date,
+          date, //create object with key date and chats with value the messages from the same date
           chats: groups[date],
         };
       })
     : [];
-
-  groupArrays.map((msg) => {
-    console.log(msg);
-  });
 
   return (
     <>
@@ -146,7 +144,7 @@ function ChatRoom() {
 }
 function ChatMessage(props: { message: Chat }) {
   const { text, uid, photoURL, createdAt, displayName, id } = props.message;
-  const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
+  const messageClass = uid === auth.currentUser.uid ? "sent" : "received"; // if the uid and current UID is the same then pass sent to messageClass property
   const className = uid === auth.currentUser.uid ? "sentName" : "receivedName";
 
   return (

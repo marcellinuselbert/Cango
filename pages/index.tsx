@@ -18,7 +18,7 @@ export default function Home() {
   {
     /*once logged in the user has object value*/
   }
-  console.log(user);
+
   return (
     <>
       {
