@@ -21,6 +21,7 @@ function ChatRoom() {
   {
     /*refer to span element*/
   }
+
   const messagesRef = firestore.collection("messages");
   {
     /*get collection messages from firestore db*/
@@ -39,6 +40,11 @@ function ChatRoom() {
   {
     /*set the variable formValue and setForm Value with empty string*/
   }
+  const landingPageScroll = () => {
+    if (isLoading == false) {
+      spanRef.current?.scrollIntoView({ behavior: "smooth" }); //if loading is false then scroll
+    }
+  };
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     {
@@ -54,7 +60,9 @@ function ChatRoom() {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setFormValue(""); //after sending messages input will be deleted
-    spanRef.current?.scrollIntoView({ behavior: "smooth" }); //after submit scroll smoothly
+
+    spanRef.current?.scrollIntoView({ behavior: "smooth" });
+    // spanRef.current?.scrollIntoView({ behavior: "smooth" }); //after submit scroll smoothly
   };
   const groups = list_chats?.reduce(
     //list_chats array with object text, displayname etc.
@@ -90,7 +98,12 @@ function ChatRoom() {
   return (
     <>
       {!isLoading ? (
-        <div className="animate-fade-in">
+        <div
+          className="animate-fade-in"
+          onLoad={() => {
+            landingPageScroll();
+          }}
+        >
           <header className="bg-gray-700 lg:rounded-none rounded-t-lg">
             <div className="grid grid-cols-2 h-20">
               <div className="mt-2 ml-5 animate-fade-in-title">
@@ -129,6 +142,8 @@ function ChatRoom() {
                 placeholder="Enter a message"
                 className="w-full bg-white"
                 variant="filled"
+                required
+                // disabled={!formValue}
               />
               {/* <button className="bg-gray-200 mr-5 w0" disabled={!formValue}>
                 <p>Send</p>
