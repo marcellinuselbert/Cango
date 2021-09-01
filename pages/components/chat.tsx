@@ -85,7 +85,7 @@ function ChatRoom() {
 
     {}
   );
-  console.log(list_chats);
+
   // // Edit: to add it in the array format instead
   const groupArrays: groupByDate[] = groups
     ? Object.keys(groups).map((date) => {
@@ -162,6 +162,14 @@ function ChatMessage(props: { message: Chat }) {
   const { text, uid, photoURL, createdAt, displayName, id } = props.message;
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received"; // if the uid and current UID is the same then pass sent to messageClass property
   const className = uid === auth.currentUser.uid ? "sentName" : "receivedName";
+  var loaded = true;
+  // console.log(createdAt);
+  if (createdAt == null) {
+    console.log("hello");
+
+    loaded = false;
+  }
+  const chatTime = loaded === true ? "mt-2" : "";
 
   return (
     <>
@@ -174,9 +182,12 @@ function ChatMessage(props: { message: Chat }) {
           }
         />
         <p className="p-2 px-3">{text}</p>
-        <div className="mt-2">
-          {addZeroBefore(createdAt?.toDate().getHours())}:
-          {addZeroBefore(createdAt?.toDate().getMinutes())}
+        <div className={`${chatTime}`}>
+          {loaded
+            ? addZeroBefore(createdAt?.toDate().getHours()) +
+              ":" +
+              addZeroBefore(createdAt?.toDate().getMinutes())
+            : ""}
         </div>
       </div>
     </>
@@ -185,12 +196,21 @@ function ChatMessage(props: { message: Chat }) {
 
 function ChatDate(props: { dates: groupByDate }) {
   const tanggal = props.dates.date;
+  var loaded = true;
+
+  if (tanggal == "undefined/NaN/undefined") {
+    console.log("hello");
+
+    loaded = false;
+  }
+  const dateBubble =
+    loaded === true
+      ? "flex justify-center items-center my-5 w-28 h-10 bg-dateBubble rounded-lg"
+      : "";
 
   return (
     <div className="flex justify-center sticky top-0">
-      <div className="flex justify-center items-center my-5 w-28 h-10 bg-dateBubble rounded-lg">
-        {tanggal}
-      </div>
+      <div className={`${dateBubble}`}>{loaded ? tanggal : ""}</div>
     </div>
   );
 }
