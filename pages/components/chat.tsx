@@ -53,11 +53,11 @@ function ChatRoom() {
 
     await messagesRef.add({
       //create new collection
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid: auth.currentUser?.uid,
       photoURL: auth.currentUser?.photoURL,
       displayName: auth.currentUser?.displayName,
       text: formValue,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setFormValue(""); //after sending messages input will be deleted
 
@@ -85,6 +85,7 @@ function ChatRoom() {
 
     {}
   );
+  console.log(list_chats);
   // // Edit: to add it in the array format instead
   const groupArrays: groupByDate[] = groups
     ? Object.keys(groups).map((date) => {
