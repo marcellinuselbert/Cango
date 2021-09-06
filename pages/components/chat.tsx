@@ -68,7 +68,7 @@ function ChatRoom() {
     //list_chats array with object text, displayname etc.
     (listDate: Record<string, Partial<Chat[]>>, chat: Chat) => {
       //reduce is like forEach will map the list_chats into list_date and chat
-      //Record function will assign key to string and value to type chat model
+      //Record function will assign key to string date and value to type list of chat model
       const dd = String(chat.createdAt?.toDate().getDate()).padStart(2, "0");
       const mm = String(chat.createdAt?.toDate().getMonth() + 1).padStart(
         2,
@@ -82,10 +82,9 @@ function ChatRoom() {
       listDate[date].push(chat); //if messages have the same date push chat to the same date
       return listDate;
     },
-
     {}
   );
-
+  console.log(groups);
   // // Edit: to add it in the array format instead
   const groupArrays: groupByDate[] = groups
     ? Object.keys(groups).map((date) => {
@@ -95,7 +94,7 @@ function ChatRoom() {
         };
       })
     : [];
-
+  console.log(groupArrays);
   return (
     <>
       {!isLoading ? (
@@ -165,6 +164,7 @@ function ChatMessage(props: { message: Chat }) {
   var loaded = true;
   // console.log(createdAt);
   if (createdAt == null) {
+    // if there's null then return loaded with false so in the html will return empty string
     console.log("hello");
 
     loaded = false;
@@ -199,6 +199,7 @@ function ChatDate(props: { dates: groupByDate }) {
   var loaded = true;
 
   if (tanggal == "undefined/NaN/undefined") {
+    // if there's undefined/nan/undefined then return loaded with false so in the html will return empty string
     console.log("hello");
 
     loaded = false;
