@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import firebase from "firebase/app";
-import firebaseConfig from "../../utils/firebaseConfig";
+import firebaseConfig from "../utils/firebaseConfig";
 import "firebase/firestore";
 import "firebase/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import TextField from "@material-ui/core/TextField";
 import SignOut from "./signout";
-import { Chat } from "../../models/Chats";
-import { groupByDate } from "../../models/groupByDate";
+import { Chat } from "../models/Chats";
+import { groupByDate } from "../models/groupByDate";
 import Loading from "./loading";
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -64,6 +64,7 @@ function ChatRoom() {
     spanRef.current?.scrollIntoView({ behavior: "smooth" });
     // spanRef.current?.scrollIntoView({ behavior: "smooth" }); //after submit scroll smoothly
   };
+  console.log(list_chats);
   const groups = list_chats?.reduce(
     //list_chats array with object text, displayname etc.
     (listDate: Record<string, Partial<Chat[]>>, chat: Chat) => {
@@ -84,7 +85,6 @@ function ChatRoom() {
     },
     {}
   );
-  console.log(groups);
   // // Edit: to add it in the array format instead
   const groupArrays: groupByDate[] = groups
     ? Object.keys(groups).map((date) => {
@@ -104,7 +104,7 @@ function ChatRoom() {
             landingPageScroll();
           }}
         >
-          <header className="bg-gray-700 lg:rounded-none rounded-t-lg">
+          <header className="bg-gray-700 lg:rounded-none rounded-t-lg fixed top-0 w-full">
             <div className="grid grid-cols-2 h-20">
               <div className="mt-2 ml-5 animate-fade-in-title">
                 <div className=" text-3xl text-white">Cango </div>
@@ -116,8 +116,8 @@ function ChatRoom() {
             </div>
           </header>
 
-          <div>
-            <div className="lg:h-up h-ext overflow-y-scroll bg-gray-300">
+          <div className="mt-20">
+            <div className="h-screen overflow-y-scroll bg-gray-300">
               {
                 /* eslint-disable */
                 groupArrays &&
@@ -135,16 +135,19 @@ function ChatRoom() {
               }{" "}
               <span ref={spanRef}></span>
             </div>
-            <form onSubmit={sendMessage} className="flex justify-end">
-              <TextField
-                value={formValue}
-                onChange={(e) => setFormValue(e.target.value)}
-                placeholder="Enter a message"
-                className="w-full bg-white"
-                variant="filled"
-                required
-                // disabled={!formValue}
-              />
+            <form onSubmit={sendMessage} className="flex justify-end ">
+              <div className="fixed bottom-0 w-full">
+                <TextField
+                  value={formValue}
+                  onChange={(e) => setFormValue(e.target.value)}
+                  placeholder="Enter a message"
+                  className="w-full bg-white"
+                  variant="filled"
+                  required
+                  // disabled={!formValue}
+                />
+              </div>
+
               {/* <button className="bg-gray-200 mr-5 w0" disabled={!formValue}>
                 <p>Send</p>
               </button> */}

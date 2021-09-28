@@ -13,6 +13,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "date-fns": "^2.23.0",
     "firebase": "^8.10.0",
+    "firebaseui": "^5.0.0",
     "gsap": "^3.7.1",
     "next": "11.1.0",
     "react": "17.0.2",

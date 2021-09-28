@@ -1,5 +1,5 @@
-import Login from "./components/login";
-import ChatRoom from "./components/chat";
+import Login from "../components/login";
+import ChatRoom from "../components/chat";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
