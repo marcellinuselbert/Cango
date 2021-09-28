@@ -106,7 +106,7 @@ function ChatRoom() {
         >
           <header
             className="bg-gray-700 lg:rounded-none rounded-t-lg fixed top-0 w-full "
-            style={{ zIndex: "2" }}
+            style={{ zIndex: 2 }}
           >
             <div className="grid grid-cols-2 h-20">
               <div className="mt-2 ml-5 animate-fade-in-title">
