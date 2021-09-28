@@ -12,4 +12,4 @@ This is my first project using Next.js and Typescript
 
 ## Deployment
 
-This project is deployed on [Cango](https://www.cango.vercel.app)
+This project is deployed on [Cango](https://cango.vercel.app/)
