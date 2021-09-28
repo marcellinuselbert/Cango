@@ -104,7 +104,10 @@ function ChatRoom() {
             landingPageScroll();
           }}
         >
-          <header className="bg-gray-700 lg:rounded-none rounded-t-lg fixed top-0 w-full">
+          <header
+            className="bg-gray-700 lg:rounded-none rounded-t-lg fixed top-0 w-full "
+            style={{ zIndex: "2" }}
+          >
             <div className="grid grid-cols-2 h-20">
               <div className="mt-2 ml-5 animate-fade-in-title">
                 <div className=" text-3xl text-white">Cango </div>
@@ -116,8 +119,8 @@ function ChatRoom() {
             </div>
           </header>
 
-          <div className="mt-20">
-            <div className="h-screen overflow-y-scroll bg-gray-300">
+          <div className="">
+            <div className="h-screen overflow-y-scroll bg-gray-300 ">
               {
                 /* eslint-disable */
                 groupArrays &&
