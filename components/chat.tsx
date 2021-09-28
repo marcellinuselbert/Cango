@@ -121,25 +121,28 @@ function ChatRoom() {
 
           <div className="">
             <div className="h-screen overflow-y-scroll bg-gray-300 ">
-              {
-                /* eslint-disable */
-                groupArrays &&
-                  groupArrays.map((byDates, index) => (
-                    <div>
-                      <ChatDate key={index} dates={byDates} />
-                      {byDates.chats?.map(
-                        (msg) =>
-                          msg !== undefined && (
-                            <ChatMessage key={msg.id} message={msg} />
-                          )
-                      )}
-                    </div>
-                  ))
-              }{" "}
-              <span ref={spanRef}></span>
+              <div className="mt-20">
+                {
+                  /* eslint-disable */
+                  groupArrays &&
+                    groupArrays.map((byDates, index) => (
+                      <div className="">
+                        <ChatDate key={index} dates={byDates} />
+                        {byDates.chats?.map(
+                          (msg) =>
+                            msg !== undefined && (
+                              <ChatMessage key={msg.id} message={msg} />
+                            )
+                        )}
+                      </div>
+                    ))
+                }{" "}
+                <span ref={spanRef}></span>
+                <div className="opacity-0 mb-10">.</div>
+              </div>
             </div>
-            <form onSubmit={sendMessage} className="flex justify-end ">
-              <div className="fixed bottom-0 w-full">
+            <form onSubmit={sendMessage} className="flex justify-end">
+              <div className="fixed bottom-0 w-full ">
                 <TextField
                   value={formValue}
                   onChange={(e) => setFormValue(e.target.value)}
